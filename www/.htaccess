@@ -1,0 +1,24 @@
+#
+# Use mod_rewrite
+#
+RewriteEngine On
+
+#
+# Uncomment following line if your webserver's URL
+# is not directly related to physical file paths
+#
+RewriteBase /
+
+#
+# Uncomment following lines to force www subdomain
+#
+RewriteCond %{HTTP_HOST} ^mydomain.com [NC]
+RewriteRule ^(.*)$ http://www.mydomain.com/$1 [L,R=301]
+
+#
+# Rewrite base rule, index.php
+#
+#RewriteCond %{REQUEST_URI} (/|\.htm|\.php|\.html|/[^.]*)$  [NC]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule (.*) index.php [QSA,L]
